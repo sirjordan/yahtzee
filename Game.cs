@@ -11,9 +11,9 @@
 		Round = 0;
 	}
 
-	public int[] RollDices()
+	public static int[] RollDices()
 	{
-		var dices = new int[5];
+		var dices = new int[Rules.NumberOfDices];
 		var rnd = new Random();
 
 		for (int i = 0; i < dices.Length; i++)

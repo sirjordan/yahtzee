@@ -1,24 +1,30 @@
-﻿
-Console.WriteLine("Welcome to Yahtzee!");
-Console.WriteLine("Press any key to continue...");
-
-var game = new Game();
+﻿var game = new Game();
 var gui = new GUI(game);
 var keyPressed = (ConsoleKey)0;
+
+gui.Welcome();
 
 while (!game.Over())
 {
 	keyPressed = Console.ReadKey().Key;
 
-	Console.Clear();
-	Console.WriteLine("Yahtzee!");
-	Console.WriteLine($"Total: {game.TotalScore}");
-	Console.WriteLine();
-	gui.PrintBoard();
-	
 	if (keyPressed == ConsoleKey.Spacebar)
 	{
-		var dices = game.RollDices();
+		var dices = Game.RollDices();
 		gui.PrintDices(dices);
 	}
+	else if (keyPressed == ConsoleKey.Enter)
+	{
+		gui.SelectionMode();
+	}
+	else if (keyPressed == ConsoleKey.UpArrow)
+	{
+		gui.Select(-1);
+	}
+	else if (keyPressed == ConsoleKey.DownArrow)
+	{
+		gui.Select(1);
+	}
+
+	gui.Update();
 }

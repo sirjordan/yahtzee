@@ -1,41 +1,46 @@
 ﻿internal class Board
 {
+	public Row[] Rows { get; private set; }
+
 	// Upper Section
-	public int[] Aces { get; private set; }
-	public int[] Twos { get; private set; }
-	public int[] Threes { get; private set; }
-	public int[] Fours { get; private set; }
-	public int[] Fives { get; private set; }
-	public int[] Sixes { get; private set; }
+	public Row Aces { get; private set; }
+	public Row Twos { get; private set; }
+	public Row Threes { get; private set; }
+	public Row Fours { get; private set; }
+	public Row Fives { get; private set; }
+	public Row Sixes { get; private set; }
 
 	// Lower Section
-	public int[] ThreeOfAKind { get; private set; }
-	public int[] FourOfAKind { get; private set; }
-	public int[] FullHouse { get; private set; }
-	public int[] SmallStraight { get; private set; }
-	public int[] LargeStraight { get; private set; }
-	public int[] Yahtzee { get; private set; }
-	public int[] Chance { get; private set; }
+	public Row ThreeOfAKind { get; private set; }
+	public Row FourOfAKind { get; private set; }
+	public Row FullHouse { get; private set; }
+	public Row SmallStraight { get; private set; }
+	public Row LargeStraight { get; private set; }
+	public Row Yahtzee { get; private set; }
+	public Row Chance { get; private set; }
 
-	public int[] Save { get; private set; }
+	public Row Save { get; private set; }
 
 	public Board()
 	{
-		Aces = new int[Rules.NumberOfDices];
-		Twos = new int[Rules.NumberOfDices];
-		Threes = new int[Rules.NumberOfDices];
-		Fours = new int[Rules.NumberOfDices];
-		Fives = new int[Rules.NumberOfDices];
-		Sixes = new int[Rules.NumberOfDices];
+		Rows = new Row[]
+		{
+			Aces = new Row("Aces"),
+			Twos = new Row("Twos"),
+			Threes = new Row("Threes"),
+			Fours = new Row("Fours"),
+			Fives = new Row("Fives"),
+			Sixes =new Row("Sixes"),
 
-		ThreeOfAKind = new int[Rules.NumberOfDices];
-		FourOfAKind = new int[Rules.NumberOfDices];
-		FullHouse = new int[Rules.NumberOfDices];
-		SmallStraight = new int[Rules.NumberOfDices];
-		LargeStraight = new int[Rules.NumberOfDices];
-		Yahtzee = new int[Rules.NumberOfDices];
-		Chance = new int[Rules.NumberOfDices];
+			ThreeOfAKind = new Row("Three Of AKind"),
+			FourOfAKind =new Row("Four Of AKind"),
+			FullHouse = new Row("Full House"),
+			SmallStraight = new Row("Small Straight"),
+			LargeStraight = new Row("Large Straight"),
+			Yahtzee = new Row("Yahtzee"),
+			Chance = new Row("Chance")
+		};
 
-		Save = new int[Rules.NumberOfDices];
+		Save = new Row("Save");
 	}
 }
