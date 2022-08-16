@@ -10,20 +10,19 @@ while (!game.Over())
 
 	if (keyPressed == ConsoleKey.Spacebar)
 	{
-		var dices = Game.RollDices();
-		gui.PrintDices(dices);
+		game.RollDices();
 	}
 	else if (keyPressed == ConsoleKey.Enter)
 	{
-		gui.SelectionMode();
+		game.TurnSelectionMode();
 	}
 	else if (keyPressed == ConsoleKey.UpArrow)
 	{
-		gui.Select(-1);
+		game.Select(-1);
 	}
 	else if (keyPressed == ConsoleKey.DownArrow)
 	{
-		gui.Select(1);
+		game.Select(1);
 	}
 
 	gui.Update();

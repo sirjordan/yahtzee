@@ -4,8 +4,6 @@
 	private int _lineLenght;
 	private ConsoleColor _originalColor;
 	private ConsoleColor _selectionColor;
-	private bool _selectionMode;
-	private int _selectedRow;
 	private int _printedRow;
 
 	public GUI(Game game)
@@ -14,8 +12,6 @@
 		_lineLenght = 60;
 		_originalColor = Console.ForegroundColor;
 		_selectionColor = ConsoleColor.Magenta;
-		_selectionMode = false;
-		_selectedRow = 0;
 		_printedRow = 0;
 
 		if (OperatingSystem.IsWindows())
@@ -45,38 +41,13 @@
 	public void Update()
 	{
 		Console.Clear();
-		Console.WriteLine("Yahtzee!");
-		Console.WriteLine($"Total: {_game.TotalScore}");
+		Console.WriteLine("Yahtzee!    [SpaceBar] Roll    [Enter] Select");
+
+		Console.WriteLine();
+		Console.WriteLine($"ROLL {FormatDices(_game.RolledDices)}");
 		Console.WriteLine();
 
 		PrintBoard();
-	}
-
-	public void SelectionMode()
-	{
-		_selectionMode = !_selectionMode;
-		_selectedRow = Convert.ToInt32(_selectionMode);
-	}
-
-	public void Select(int direction)
-	{
-		if (!_selectionMode)
-		{
-			return;
-		}
-
-		if (direction > 0 && _selectedRow < _game.Board.Rows.Length)
-		{
-			_selectedRow++;
-		}
-		else if (direction < 0 && _selectedRow > 1)
-		{
-			_selectedRow--;
-		}
-		else
-		{
-			return;
-		}
 	}
 
 	private void PrintBoard()
@@ -89,14 +60,12 @@
 
 		foreach (var row in _game.Board.Rows)
 		{
-			PrintBoardRow(row.Name, FormatDices(row.Dices), 0);
+			PrintBoardRow(row.Name, FormatDices(row.Dices), row.CalcScore());
 			PrintLine();
 		}
-	}
 
-	public void PrintDices(int[] dices)
-	{
-		Console.Write(FormatDices(dices));
+		PrintBoardRow("TOTAL", "", _game.GetTotalScore());
+		PrintLine();
 	}
 
 	private static string FormatDices(int[] dices)
@@ -120,7 +89,7 @@
 
 	private void PrintBoardRow(object a, object b, object c)
 	{
-		if (_selectionMode && _printedRow == _selectedRow)
+		if (_game.SelectionMode && _printedRow == _game.SelectedRow)
 		{
 			Console.ForegroundColor = _selectionColor;
 		}
