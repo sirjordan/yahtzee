@@ -3,11 +3,10 @@ var gui = new GUI(game);
 var keyPressed = (ConsoleKey)0;
 
 gui.Welcome();
+Console.ReadKey();
 
-while (!game.Over())
+while (!game.IsOver())
 {
-	keyPressed = Console.ReadKey().Key;
-
 	if (keyPressed == ConsoleKey.Spacebar)
 	{
 		game.RollDices();
@@ -26,4 +25,7 @@ while (!game.Over())
 	}
 
 	gui.Update();
+	keyPressed = Console.ReadKey().Key;
 }
+
+gui.GameOver();

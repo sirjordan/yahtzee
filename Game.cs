@@ -24,6 +24,7 @@
 			if (!Board.Rows[SelectedRow - 1].Set)
 			{
 				Board.Rows[SelectedRow - 1].Dices = RolledDices;
+				Round++;
 			}
 		}
 
@@ -76,7 +77,7 @@
 		return Board.Rows.Sum(r => r.CalcScore());
 	}
 
-	public bool Over()
+	public bool IsOver()
 	{
 		return Round == Rules.Rounds;
 	}

@@ -17,8 +17,9 @@
 		if (OperatingSystem.IsWindows())
 		{
 			Console.SetWindowSize(1, 1);
-			Console.SetBufferSize(160, 40);
-			Console.SetWindowSize(160, 40);
+			Console.SetBufferSize(160, 44);
+			Console.SetWindowSize(160, 44);
+			Console.SetWindowPosition(0, 0);
 		}
 	}
 
@@ -48,6 +49,11 @@
 		Console.WriteLine();
 
 		PrintBoard();
+	}
+
+	public void GameOver()
+	{
+		Console.WriteLine("GAME OVER! THANK YOU FOR PLAYING!");
 	}
 
 	private void PrintBoard()
