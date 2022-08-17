@@ -3,17 +3,17 @@
 	private int[] _dices;
 	private IScoreAlgorithm _scoreAlgorithm;
 
-	public bool Set { get; private set; }
+	public bool IsSet { get; private set; }
 	public string Name { get; private set; }
 	public int[] Dices
 	{
 		get { return _dices; }
 		set 
 		{
-			if (!Set)
+			if (!IsSet)
 			{
 				_dices = value;
-				Set = true;
+				IsSet = true;
 			}
 			else
 			{
@@ -27,13 +27,13 @@
 		Name = rowName;
 		_scoreAlgorithm = scoreAlgorithm;
 
-		Set = false;
+		IsSet = false;
 		_dices = new int[Rules.NumberOfDices];
 	}
 
 	public int CalcScore()
 	{
-		if (Dices.All(d => d > 0))
+		if (IsSet)
 		{
 			return _scoreAlgorithm.GetScore(Dices);
 		}

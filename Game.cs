@@ -21,7 +21,7 @@
 	{
 		if (SelectionMode && RolledDices.All(d => d != 0))
 		{
-			if (!Board.Rows[SelectedRow - 1].Set)
+			if (!Board.Rows[SelectedRow - 1].IsSet)
 			{
 				Board.Rows[SelectedRow - 1].Dices = RolledDices;
 				Round++;
@@ -29,7 +29,7 @@
 		}
 
 		SelectionMode = !SelectionMode;
-		SelectedRow = Convert.ToInt32(SelectionMode);
+		SelectedRow = Array.FindIndex(Board.Rows, r => !r.IsSet) + 1;
 	}
 
 	public void Select(int direction)
@@ -42,7 +42,6 @@
 		if (direction > 0 && SelectedRow < Board.Rows.Length)
 		{
 			SelectedRow++;
-
 		}
 		else if (direction < 0 && SelectedRow > 1)
 		{
@@ -53,9 +52,22 @@
 			return;
 		}
 
-		if (Board.Rows[SelectedRow - 1].Set)
+		if (Board.Rows[SelectedRow - 1].IsSet)
 		{
-			Select(direction);
+			// Jump over the row is selected 
+			// If not the first or the last
+			if (SelectedRow == 1)
+			{
+				SelectedRow++;
+			}
+			else if (SelectedRow == Board.Rows.Length)
+			{
+				SelectedRow--;
+			}
+			else
+			{
+				Select(direction);
+			}
 		}
 	}
 
